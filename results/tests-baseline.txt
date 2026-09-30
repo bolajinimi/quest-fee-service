@@ -1,0 +1,338 @@
+
+ RUN  v2.1.9 /home/claude/quest-fee-service
+
+ ✓ tests/flow.test.ts (5 tests) 49ms
+ ❯ tests/fee-consistency.test.ts (20 tests | 13 failed) 203ms
+   × fee consistency across quote, charge and receipt > amount 100: quote = charge = receipt = spec 50ms
+     → quote: expected { fee: 1.5, total: 101.5 } to deeply equal { fee: 50, total: 150 }
+   × fee consistency across quote, charge and receipt > amount 1000: quote = charge = receipt = spec 17ms
+     → quote: expected { fee: 15, total: 1015 } to deeply equal { fee: 50, total: 1050 }
+   × fee consistency across quote, charge and receipt > amount 2500: quote = charge = receipt = spec 12ms
+     → quote: expected { fee: 37.5, total: 2537.5 } to deeply equal { fee: 50, total: 2550 }
+   × fee consistency across quote, charge and receipt > amount 3333.34: quote = charge = receipt = spec 8ms
+     → receipt: expected { fee: 50.01, total: 3383.35 } to deeply equal { fee: 50, total: 3383.34 }
+   × fee consistency across quote, charge and receipt > amount 3336.66: quote = charge = receipt = spec 8ms
+     → charge: expected { fee: 50.04, total: 3386.7 } to deeply equal { fee: 50.05, total: 3386.71 }
+   × fee consistency across quote, charge and receipt > amount 12345.67: quote = charge = receipt = spec 7ms
+     → charge: expected { fee: 185.18, total: 12530.85 } to deeply equal { fee: 185.19, total: 12530.86 }
+   × fee consistency across quote, charge and receipt > amount 12345.99: quote = charge = receipt = spec 7ms
+     → charge: expected { fee: 185.18, total: 12531.17 } to deeply equal { fee: 185.19, total: 12531.18 }
+   × fee consistency across quote, charge and receipt > amount 20000.1: quote = charge = receipt = spec 7ms
+     → receipt: expected { fee: 300.01, total: 20300.11 } to deeply equal { fee: 300, total: 20300.1 }
+   × fee consistency across quote, charge and receipt > amount 33333.33: quote = charge = receipt = spec 9ms
+     → charge: expected { fee: 499.99, total: 33833.32 } to deeply equal { fee: 500, total: 33833.33 }
+   × fee consistency across quote, charge and receipt > amount 99999.99: quote = charge = receipt = spec 7ms
+     → charge: expected { fee: 1499.99, total: 101499.98 } to deeply equal { fee: 1500, total: 101499.99 }
+   × fee consistency across quote, charge and receipt > amount 123456.78: quote = charge = receipt = spec 7ms
+     → receipt: expected { fee: 1851.86, total: 125308.64 } to deeply equal { fee: 1851.85, total: 125308.63 }
+   × fee consistency across quote, charge and receipt > amount 250000.5: quote = charge = receipt = spec 7ms
+     → charge: expected { fee: 3750, total: 253750.5 } to deeply equal { fee: 3750.01, total: 253750.51 }
+   × fee consistency across quote, charge and receipt > amount 999999.97: quote = charge = receipt = spec 7ms
+     → charge: expected { fee: 14999.99, total: 1014999.96 } to deeply equal { fee: 15000, total: 1014999.97 }
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 13 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 100: quote = charge = receipt = spec
+AssertionError: quote: expected { fee: 1.5, total: 101.5 } to deeply equal { fee: 50, total: 150 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 50,
+-   "total": 150,
++   "fee": 1.5,
++   "total": 101.5,
+  }
+
+ ❯ tests/fee-consistency.test.ts:27:71
+     25|     const expected = { fee: specFee(amount), total: specTotal(amount) …
+     26| 
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+       |                                                                       ^
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 1000: quote = charge = receipt = spec
+AssertionError: quote: expected { fee: 15, total: 1015 } to deeply equal { fee: 50, total: 1050 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 50,
+-   "total": 1050,
++   "fee": 15,
++   "total": 1015,
+  }
+
+ ❯ tests/fee-consistency.test.ts:27:71
+     25|     const expected = { fee: specFee(amount), total: specTotal(amount) …
+     26| 
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+       |                                                                       ^
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 2500: quote = charge = receipt = spec
+AssertionError: quote: expected { fee: 37.5, total: 2537.5 } to deeply equal { fee: 50, total: 2550 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 50,
+-   "total": 2550,
++   "fee": 37.5,
++   "total": 2537.5,
+  }
+
+ ❯ tests/fee-consistency.test.ts:27:71
+     25|     const expected = { fee: specFee(amount), total: specTotal(amount) …
+     26| 
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+       |                                                                       ^
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/13]⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 3333.34: quote = charge = receipt = spec
+AssertionError: receipt: expected { fee: 50.01, total: 3383.35 } to deeply equal { fee: 50, total: 3383.34 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 50,
+-   "total": 3383.34,
++   "fee": 50.01,
++   "total": 3383.35,
+  }
+
+ ❯ tests/fee-consistency.test.ts:29:77
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+       |                                                                             ^
+     30|   });
+     31| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/13]⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 3336.66: quote = charge = receipt = spec
+AssertionError: charge: expected { fee: 50.04, total: 3386.7 } to deeply equal { fee: 50.05, total: 3386.71 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 50.05,
+-   "total": 3386.71,
++   "fee": 50.04,
++   "total": 3386.7,
+  }
+
+ ❯ tests/fee-consistency.test.ts:28:74
+     26| 
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+       |                                                                          ^
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+     30|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/13]⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 12345.67: quote = charge = receipt = spec
+AssertionError: charge: expected { fee: 185.18, total: 12530.85 } to deeply equal { fee: 185.19, total: 12530.86 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 185.19,
+-   "total": 12530.86,
++   "fee": 185.18,
++   "total": 12530.85,
+  }
+
+ ❯ tests/fee-consistency.test.ts:28:74
+     26| 
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+       |                                                                          ^
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+     30|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/13]⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 12345.99: quote = charge = receipt = spec
+AssertionError: charge: expected { fee: 185.18, total: 12531.17 } to deeply equal { fee: 185.19, total: 12531.18 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 185.19,
+-   "total": 12531.18,
++   "fee": 185.18,
++   "total": 12531.17,
+  }
+
+ ❯ tests/fee-consistency.test.ts:28:74
+     26| 
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+       |                                                                          ^
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+     30|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/13]⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 20000.1: quote = charge = receipt = spec
+AssertionError: receipt: expected { fee: 300.01, total: 20300.11 } to deeply equal { fee: 300, total: 20300.1 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 300,
+-   "total": 20300.1,
++   "fee": 300.01,
++   "total": 20300.11,
+  }
+
+ ❯ tests/fee-consistency.test.ts:29:77
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+       |                                                                             ^
+     30|   });
+     31| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/13]⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 33333.33: quote = charge = receipt = spec
+AssertionError: charge: expected { fee: 499.99, total: 33833.32 } to deeply equal { fee: 500, total: 33833.33 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 500,
+-   "total": 33833.33,
++   "fee": 499.99,
++   "total": 33833.32,
+  }
+
+ ❯ tests/fee-consistency.test.ts:28:74
+     26| 
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+       |                                                                          ^
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+     30|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/13]⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 99999.99: quote = charge = receipt = spec
+AssertionError: charge: expected { fee: 1499.99, total: 101499.98 } to deeply equal { fee: 1500, total: 101499.99 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 1500,
+-   "total": 101499.99,
++   "fee": 1499.99,
++   "total": 101499.98,
+  }
+
+ ❯ tests/fee-consistency.test.ts:28:74
+     26| 
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+       |                                                                          ^
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+     30|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/13]⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 123456.78: quote = charge = receipt = spec
+AssertionError: receipt: expected { fee: 1851.86, total: 125308.64 } to deeply equal { fee: 1851.85, total: 125308.63 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 1851.85,
+-   "total": 125308.63,
++   "fee": 1851.86,
++   "total": 125308.64,
+  }
+
+ ❯ tests/fee-consistency.test.ts:29:77
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+       |                                                                             ^
+     30|   });
+     31| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/13]⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 250000.5: quote = charge = receipt = spec
+AssertionError: charge: expected { fee: 3750, total: 253750.5 } to deeply equal { fee: 3750.01, total: 253750.51 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 3750.01,
+-   "total": 253750.51,
++   "fee": 3750,
++   "total": 253750.5,
+  }
+
+ ❯ tests/fee-consistency.test.ts:28:74
+     26| 
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+       |                                                                          ^
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+     30|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/13]⎯
+
+ FAIL  tests/fee-consistency.test.ts > fee consistency across quote, charge and receipt > amount 999999.97: quote = charge = receipt = spec
+AssertionError: charge: expected { fee: 14999.99, total: 1014999.96 } to deeply equal { fee: 15000, total: 1014999.97 }
+
+- Expected
++ Received
+
+  Object {
+-   "fee": 15000,
+-   "total": 1014999.97,
++   "fee": 14999.99,
++   "total": 1014999.96,
+  }
+
+ ❯ tests/fee-consistency.test.ts:28:74
+     26| 
+     27|     expect({ fee: quote.body.fee, total: quote.body.total }, "quote").…
+     28|     expect({ fee: charge.body.fee, total: charge.body.total }, "charge…
+       |                                                                          ^
+     29|     expect({ fee: receipt.body.fee, total: receipt.body.total }, "rece…
+     30|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/13]⎯
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  13 failed | 12 passed (25)
+   Start at  21:12:20
+   Duration  1.14s (transform 103ms, setup 0ms, collect 324ms, tests 252ms, environment 0ms, prepare 108ms)
+

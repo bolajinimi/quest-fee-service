@@ -1,0 +1,105 @@
+{
+  "label": "baseline",
+  "measuredAt": "2026-09-30T20:12:10.620Z",
+  "node": "v22.22.2",
+  "defect1_feeConsistency": {
+    "fixed20": {
+      "cases": 20,
+      "mismatches": 13,
+      "examples": [
+        {
+          "amount": 100,
+          "spec": 50,
+          "quote": 1.5,
+          "charged": 50,
+          "receipt": 50
+        },
+        {
+          "amount": 1000,
+          "spec": 50,
+          "quote": 15,
+          "charged": 50,
+          "receipt": 50
+        },
+        {
+          "amount": 2500,
+          "spec": 50,
+          "quote": 37.5,
+          "charged": 50,
+          "receipt": 50
+        },
+        {
+          "amount": 3333.34,
+          "spec": 50,
+          "quote": 50,
+          "charged": 50,
+          "receipt": 50.01
+        },
+        {
+          "amount": 3336.66,
+          "spec": 50.05,
+          "quote": 50.05,
+          "charged": 50.04,
+          "receipt": 50.05
+        }
+      ]
+    },
+    "sweep1000": {
+      "cases": 1000,
+      "mismatches": 995,
+      "examples": [
+        {
+          "amount": 504691.1,
+          "spec": 7570.37,
+          "quote": 7570.37,
+          "charged": 7570.36,
+          "receipt": 7570.37
+        },
+        {
+          "amount": 176251,
+          "spec": 2643.77,
+          "quote": 2643.76,
+          "charged": 2643.76,
+          "receipt": 2643.77
+        },
+        {
+          "amount": 1154562.82,
+          "spec": 17318.44,
+          "quote": 17318.44,
+          "charged": 17318.44,
+          "receipt": 17318.45
+        },
+        {
+          "amount": 445109.31,
+          "spec": 6676.64,
+          "quote": 6676.64,
+          "charged": 6676.63,
+          "receipt": 6676.64
+        },
+        {
+          "amount": 751321.02,
+          "spec": 11269.82,
+          "quote": 11269.82,
+          "charged": 11269.81,
+          "receipt": 11269.82
+        }
+      ]
+    },
+    "filesWithFeeRule": 3,
+    "files": [
+      "src/lib/receipt.ts",
+      "src/routes/quote.ts",
+      "src/routes/subscriptions.ts"
+    ]
+  },
+  "defect2_validation": {
+    "attempted": 5,
+    "accepted": 5
+  },
+  "defect3_retry": {
+    "requests": 10,
+    "upstreamCalls": 60,
+    "callsPerRequest": 6,
+    "elapsedMs": 17
+  }
+}
