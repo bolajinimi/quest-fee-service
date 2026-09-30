@@ -1,6 +1,6 @@
 # intent.md: Why I chose this problem
 
-**Author:** Olatunji Clement · **Date:** 2026-09-30 · **Repo:** ⚠️ PENDING: add the GitHub URL once pushed
+**Author:** Olatunji Clement · **Date:** 2026-09-30 · **Repo:** [github.com/bolajinimi/quest-fee-service](https://github.com/bolajinimi/quest-fee-service)
 
 ## The flow
 

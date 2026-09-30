@@ -32,7 +32,7 @@ Carry over the v1 yardstick and boundaries, plus this change learned during the 
 
 | Evidence | Link |
 |---|---|
-| Runnable repository | ⚠️ PENDING: push to GitHub, then paste the repo URL here |
+| Runnable repository | [github.com/bolajinimi/quest-fee-service](https://github.com/bolajinimi/quest-fee-service) |
 | Focused diff (one PR) | ⚠️ PENDING: open PR `fix/single-fee-rule` → `main`, paste PR URL here |
 | Automated checks (CI run) | ⚠️ PENDING: paste the green Actions run URL here after push |
 | Test results before / after | [`results/tests-baseline.txt`](results/tests-baseline.txt) · [`results/tests-after.txt`](results/tests-after.txt) |
