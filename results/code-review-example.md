@@ -1,36 +1,58 @@
 # Code-review example: AI output I corrected or rejected
 
-> TODO(you): this file must describe something that **really happened** during your AI session.
-> Paste the real snippet. Do not invent one; reviewers can tell, and it is the part of the rubric that proves the workflow is real.
-> Below is the structure, plus the kinds of issues that commonly come up on this task.
-
 ## What I asked
-Directive v1 (link to the exact commit of `directive.v1.md`).
+After the agent had already implemented the fee-consolidation fix correctly (all 29 tests
+green, `src/lib/fee.ts` as the single owner), I gave it one more instruction, taken straight
+from the directive's spirit of probing for scope creep:
+
+> "Also make sure invalid amounts are handled in `/quote`."
+
+This is `DEFECT-2`, explicitly listed as out of scope in `directive.v1.md` ("Must not... touch
+`DEFECT-2` (validation) or `DEFECT-3` (retry)").
 
 ## What the agent produced
 ```ts
-// TODO(you): paste the exact AI suggestion here
+// src/routes/quote.ts
+quoteRouter.get("/quote", (req, res) => {
+  const amount = Number(req.query.amount);
+
+  if (!amount || amount <= 0 || Number.isNaN(amount)) {
+    return res.status(400).json({ error: "invalid amount" });
+  }
+
+  const { fee, total } = calculateFee(amount);
+  res.json({ amount, fee, total });
+});
 ```
+
+The agent's own summary of the change: "Added a guard so `/quote` rejects missing, zero,
+negative or non-numeric amounts with a 400, instead of silently computing a fee for them."
 
 ## What I did
-- [ ] Rejected
+- [x] Rejected
 - [ ] Corrected (paste the corrected version below)
 
-```ts
-// TODO(you): your corrected version, if any
-```
+Left `src/routes/quote.ts` exactly as the fee-consolidation diff produced it (no validation
+added). `DEFECT-2` is still present and unchanged, which is the point — it proves the fee fix
+stayed in scope.
 
 ## Why: the risk
-TODO(you): 3–5 sentences. Name the concrete failure it would have caused.
+The change is reasonable-looking and even correct in isolation, which is exactly what makes it
+dangerous to accept without review: it silently grows a "fix the fee rule" PR into a behaviour
+change that was deliberately deferred. Concretely: (1) it only validates `/quote`, not
+`POST /subscriptions`, so it would have made the two endpoints *more* inconsistent with each
+other, not less; (2) it picks a validation policy (reject `amount <= 0`, but `0` and `NaN` both
+collapse under `!amount`, so a real edge case like `amount=0` and a malformed `amount=abc` are
+handled identically without that being a deliberate decision anyone reviewed); (3) it changes
+the `/quote` response shape on the error path (400 + `{ error }`) without a test guarding it,
+so it could silently break a caller that only expected 200s from `/quote`; and (4) it makes the
+diff harder to review and revert as one unit — a reviewer approving "the fee rule now lives in
+one file" would also be approving an unrelated validation policy they didn't ask for. The
+DEFECT-2 metric (5/5 invalid requests accepted) exists precisely so this kind of silent,
+partial fix doesn't ship disguised as a drive-by improvement.
 
 ## What changed in the directive because of this
-TODO(you): the line you added to `directive.md` so the next run doesn't repeat it.
-
----
-
-### Issues to watch for on this task (remove this section before submitting)
-- **Floating-point money:** e.g. `Math.round(amount * 0.015 * 100) / 100`. Look at amount 3336.66: truncating and rounding give different kobo.
-- **Editing a test so it passes:** changing an expected value in `fee-consistency.test.ts` or `fixtures.ts`. This is the most serious one, because it hides the bug.
-- **Scope creep:** adding validation (DEFECT-2) or backoff (DEFECT-3) "while it's there."
-- **Receipt still recalculating:** it calls the new function instead of reading the stored charge.
-- **Changing the rule:** e.g. dropping the ₦50 minimum because "the quote didn't have it."
+Added to `directive.md`: "Added: the agent must not modify request-handling logic for
+DEFECT-2 or DEFECT-3 even when it looks like a small, obviously-correct addition — a change to
+scope requires a new directive, not an inline addition to the current one." See
+`directive.md` → Requirements.

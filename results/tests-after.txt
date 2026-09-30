@@ -1,0 +1,12 @@
+
+ RUN  v2.1.9 /Users/bolaji2020/Downloads/quest-fee-service
+
+ ✓ tests/fee.test.ts (4 tests) 2ms
+ ✓ tests/flow.test.ts (5 tests) 21ms
+ ✓ tests/fee-consistency.test.ts (20 tests) 56ms
+
+ Test Files  3 passed (3)
+      Tests  29 passed (29)
+   Start at  21:47:42
+   Duration  360ms (transform 144ms, setup 0ms, collect 348ms, tests 79ms, environment 0ms, prepare 93ms)
+

@@ -1,0 +1,31 @@
+{
+  "label": "handoff",
+  "measuredAt": "2026-09-30T20:50:44.713Z",
+  "node": "v20.20.2",
+  "defect1_feeConsistency": {
+    "fixed20": {
+      "cases": 20,
+      "mismatches": 0,
+      "examples": []
+    },
+    "sweep1000": {
+      "cases": 1000,
+      "mismatches": 0,
+      "examples": []
+    },
+    "filesWithFeeRule": 1,
+    "files": [
+      "src/lib/fee.ts"
+    ]
+  },
+  "defect2_validation": {
+    "attempted": 5,
+    "accepted": 5
+  },
+  "defect3_retry": {
+    "requests": 10,
+    "upstreamCalls": 60,
+    "callsPerRequest": 6,
+    "elapsedMs": 5
+  }
+}

@@ -1,6 +1,6 @@
 # intent.md: Why I chose this problem
 
-**Author:** Olatunji Clement · **Date:** 2026-09-30 · **Repo:** TODO(you): link
+**Author:** Olatunji Clement · **Date:** 2026-09-30 · **Repo:** ⚠️ PENDING: add the GitHub URL once pushed
 
 ## The flow
 
@@ -32,7 +32,11 @@ Scored 1 (low) to 5 (high). Operating cost means the ongoing cost of leaving it 
 
 **Decision: fix #1.** It is the only problem that hurts every user on the happy path, and it is the one most likely to keep getting worse, because every future fee change multiplies the drift. It also gives a clear correctness check (spec vs. quote, charge and receipt) and a clear maintainability measure (files you must edit to change the rule).
 
-TODO(you): add one or two sentences in your own words, e.g. a real example from your fintech work where a displayed amount and a charged amount disagreed.
+⚠️ PENDING (author's own words): a sentence or two on why this class of bug is the one you'd
+prioritize — e.g. a real instance from your own work where a quoted price and a charged price
+disagreed, and what it cost to resolve. I haven't added a fabricated anecdote here because it
+needs to be something that actually happened to you; reviewers weight this kind of concrete,
+personal reasoning, and an invented one would be worse than leaving it open.
 
 ## What I will NOT change
 
