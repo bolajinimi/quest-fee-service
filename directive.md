@@ -33,8 +33,8 @@ Carry over the v1 yardstick and boundaries, plus this change learned during the 
 | Evidence | Link |
 |---|---|
 | Runnable repository | [github.com/bolajinimi/quest-fee-service](https://github.com/bolajinimi/quest-fee-service) |
-| Focused diff (one PR) | ⚠️ PENDING: open PR `fix/single-fee-rule` → `main`, paste PR URL here |
-| Automated checks (CI run) | ⚠️ PENDING: paste the green Actions run URL here after push |
+| Focused diff (one PR) | [PR #1](https://github.com/bolajinimi/quest-fee-service/pull/1) |
+| Automated checks (CI run) | [`ci` / check — passed](https://github.com/bolajinimi/quest-fee-service/actions/runs/36780711219/job/110109964845?pr=1) |
 | Test results before / after | [`results/tests-baseline.txt`](results/tests-baseline.txt) · [`results/tests-after.txt`](results/tests-after.txt) |
 | Quality metrics before / after | [`results/metrics-baseline.md`](results/metrics-baseline.md) · [`results/metrics-after.md`](results/metrics-after.md) |
 | Code-review example (AI output corrected or rejected) | [`results/code-review-example.md`](results/code-review-example.md) |
