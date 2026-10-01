@@ -1,6 +1,6 @@
 {
   "label": "after",
-  "measuredAt": "2026-09-30T20:47:52.742Z",
+  "measuredAt": "2026-10-01T01:08:29.200Z",
   "node": "v20.20.2",
   "defect1_feeConsistency": {
     "fixed20": {
@@ -26,6 +26,6 @@
     "requests": 10,
     "upstreamCalls": 60,
     "callsPerRequest": 6,
-    "elapsedMs": 5
+    "elapsedMs": 3
   }
 }

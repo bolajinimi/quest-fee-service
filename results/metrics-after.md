@@ -1,6 +1,6 @@
 # Metrics: after
 
-Measured locally (2026-09-30T20:47:52.742Z, Node v20.20.2) against the in-process app.
+Measured locally (2026-10-01T01:08:29.200Z, Node v20.20.2) against the in-process app.
 These are **measured values from a local test**, not production or team-wide figures.
 
 | Defect | Metric | Value |
@@ -10,7 +10,7 @@ These are **measured values from a local test**, not production or team-wide fig
 | 1. Duplicated fee logic | Source files containing a copy of the fee rule | 1 (src/lib/fee.ts) |
 | 2. Missing validation | Invalid requests accepted (201) | 5 / 5 |
 | 3. Naive retry | Upstream calls per user request while feed is down | 6 |
-| 3. Naive retry | Time for 10 failing requests | 5 ms |
+| 3. Naive retry | Time for 10 failing requests | 3 ms |
 
 ## Example fee mismatches (first 5 of fixed cases)
 
