@@ -41,7 +41,7 @@ Carry over the v1 yardstick and boundaries, plus this change learned during the 
 | Decision record | [`decision-record.md`](decision-record.md) |
 | Quality metrics and handoff note | [`HANDOFF.md`](HANDOFF.md) |
 | Why this problem | [`intent.md`](intent.md) |
-| Loom walkthrough | ⚠️ PENDING: record and paste the link here |
+| Loom walkthrough | [Loom video](https://www.loom.com/share/8f892adec3374d34a283a03a1de2b1b9) |
 
 ### Results summary
 
