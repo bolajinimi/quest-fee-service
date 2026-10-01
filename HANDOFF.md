@@ -18,7 +18,7 @@ curl localhost:3000/subscriptions/sub_1/receipt
 
 | Path | What it is |
 |---|---|
-| `src/lib/fee.ts` | TODO(you): **The only place the fee rule lives.** Change the fee here. |
+| `src/lib/fee.ts` | **The only place the fee rule lives.** Change the fee here. |
 | `src/routes/quote.ts` | `GET /quote`: preview fee and total |
 | `src/routes/subscriptions.ts` | `POST /subscriptions` (charge) and `GET /subscriptions/:id/receipt` |
 | `src/lib/priceFeed.ts` | Mock upstream feed. **Known issue DEFECT-3:** naive retry |
@@ -41,10 +41,23 @@ curl localhost:3000/subscriptions/sub_1/receipt
 > **Success means:** only `tests/fixtures.ts`, `tests/fee.test.ts` and `src/lib/fee.ts` changed. Record your time and anything confusing.
 
 ### Observed result
-TODO(you): pick one and delete the other.
 
-- **Performed by another engineer:** name/role, date, time taken, files changed, what confused them, and what I changed in the docs as a result.
-- **Self-performed. Limitation:** I did this myself on a fresh clone (`git clone` into a new folder, following only this file). Time: TODO min. Files changed: TODO. This is **not independent validation**; someone new to the code would likely take longer.
+- **Self-performed. Limitation:** I did this myself in-repo (not a fresh clone) on 2026-09-30,
+  following only the steps in this file, changing the rule to **2% / ₦100 minimum** and back.
+  **Time: ~2 min 11 sec.** **Files changed: exactly 3** — `tests/fixtures.ts`,
+  `src/lib/fee.ts`, `tests/fee.test.ts` — matching the "success" criterion above.
+  What confused me: my first attempt at a half-kobo rounding test case (`amount: 3333.25`)
+  picked an amount whose raw 2% fee (₦66.67) was *below* the new ₦100 minimum, so the
+  minimum silently dominated and the test didn't exercise rounding at all — it just asserted
+  the floor. I only caught this because the test failed with `fee: 100`, not the value I'd
+  hand-computed. I corrected it to `amount: 5000.25` (raw fee exactly ₦100.005, above the
+  minimum, a clean half-up-rounds-to-.01 case). **This is not independent validation** —
+  I already knew the code, so I did not experience the "where do I even start" friction a new
+  engineer would; the timing above measures the edit-and-verify loop, not discovery time.
+  Someone new to the repo would likely take meaningfully longer to find `calculateFee` and
+  understand the half-up/minimum interaction well enough to write a correct boundary test.
+  Metrics captured mid-exercise (still 0/20, 0/1000, 1 file, DEFECT-2/3 unchanged):
+  [`results/metrics-handoff.md`](results/metrics-handoff.md).
 
 ## Review checklist (for any change to the fee flow)
 - [ ] The fee rule is changed only in `src/lib/fee.ts`; `grep -rn "0.015\|FEE_RATE" src` shows one file.

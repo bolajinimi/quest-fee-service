@@ -1,6 +1,6 @@
 # Decision record 001: Where the fee rule lives
 
-**Status:** TODO(you): Accepted · **Date:** TODO · **Decider:** Olatunji Clement
+**Status:** Accepted · **Date:** 2026-09-30 · **Decider:** Olatunji Clement
 
 ## Context
 The fee rule was implemented three times (quote, charge, receipt) with different rounding and minimum handling. Measured locally: 13/20 fixed cases mismatched, and 3 files had to be edited to change the rule. See `intent.md`.
@@ -15,7 +15,15 @@ The fee rule was implemented three times (quote, charge, receipt) with different
 | D. Leave three copies and add a test that they agree | No refactor | Keeps the maintenance cost (still 3 edits); it only detects drift after the fact |
 
 ## Decision
-TODO(you): expected **Option A**. Write 2–3 sentences in your own words.
+**Option A.** A single pure function is the smallest change that fixes the actual problem:
+quote, charge and receipt disagreeing. It needs no new infrastructure, is trivial to unit-test
+in isolation from the HTTP layer, and keeps the diff small enough that a reviewer can hold the
+whole change in their head. Option B (a class/service) and Option C (config-driven rate) both
+solve problems we don't have yet — there is exactly one fee rule today, and speculative
+flexibility for per-offering fees or hot-reloadable rates would be the kind of premature
+abstraction this exercise is explicitly trying to avoid. Option D was rejected outright: a
+test that only detects drift after the fact still leaves three places to edit and three ways
+to get it wrong.
 
 Also decided: **the receipt reads the stored `fee`/`total`** instead of recalculating. A receipt must show what was charged, even if the rule changes later.
 
